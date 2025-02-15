@@ -1,0 +1,25 @@
+name: Build ZIP on Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Remove Unnecessary Files
+        run: rm -rf .git .github README.md .gitignore
+
+      - name: Create ZIP
+        run: zip -r theme-plugin.zip ./*
+
+      - name: Upload ZIP as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: logical-pods
+          path: logical-pods.zip
