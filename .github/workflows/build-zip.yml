@@ -17,7 +17,13 @@ jobs:
         run: rm -rf .git .github README.md .gitignore
 
       - name: Creare il file ZIP
-        run: zip -r logical-pods.zip ./*
+        run: |
+          mkdir -p logical-pods
+          cp -r ./* logical-pods/
+          zip -r logical-pods.zip logical-pods
+
+      - name: Debug: Controllo ZIP
+        run: ls -lh && test -f logical-pods.zip && echo "✅ ZIP creato!" || (echo "❌ ERRORE: Il file ZIP non è stato generato!" && exit 1)
 
       - name: Salvare lo ZIP come Artifact
         uses: actions/upload-artifact@v4
