@@ -1,8 +1,9 @@
-name: Build ZIP on Release
+name: Build ZIP on Push
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -12,13 +13,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Remove Unnecessary Files
+      - name: Rimuovere file inutili
         run: rm -rf .git .github README.md .gitignore
 
-      - name: Create ZIP
+      - name: Creare il file ZIP
         run: zip -r theme-plugin.zip ./*
 
-      - name: Upload ZIP as Artifact
+      - name: Salvare lo ZIP come Artifact
         uses: actions/upload-artifact@v4
         with:
           name: logical-pods
