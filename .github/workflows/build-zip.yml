@@ -17,7 +17,7 @@ jobs:
         run: rm -rf .git .github README.md .gitignore
 
       - name: Creare il file ZIP
-        run: zip -r theme-plugin.zip ./*
+        run: zip -r logical-pods.zip ./*
 
       - name: Salvare lo ZIP come Artifact
         uses: actions/upload-artifact@v4
